@@ -30,7 +30,7 @@ const PROJECTS = [
     stack: ["React", "Firebase", "Tailwind", "Firestore"],
     repo: "https://github.com/AndreaEspinola-dev/spot-essence-inventario",
     demo: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/AndreaEspinola-dev/spot-essence-inventario/main/App%20Spot/App%20Spot%20(1)%20(1).pdf&embedded=true",
-    cover:"public/imagenes/Spotnegro.jpg"
+    cover:"/imagenes/Spotnegro.jpg"
   },
     // ⭐ FitnessApp
   {
