@@ -631,9 +631,9 @@ function Contact() {
           className="contact-card flex flex-col"
         >
           <form
-            action="https://formspree.io/f/abcdxyz1"  // 🔁 Pega aquí tu URL de Formspree
-            method="POST"
-            className="space-y-3 flex-1 flex flex-col"
+          action="https://formspree.io/f/mdkvvzpb"
+          method="POST"
+          className="space-y-3"
           >
             <input
               className="contact-input"
