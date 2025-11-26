@@ -14,7 +14,7 @@ const INFO = {
   name: "Andrea Espínola",
   role: "Desarrolladora Full Stack Junior",
   tagline:
-    "Analista Programadora con experiencia en desarrollo web, bases de datos y automatización de procesos. He participado en proyectos de desarrollo full stack utilizando React, Firebase y TailwindCSS..",
+    "Analista Programadora apasionada por el desarrollo web y la creación de experiencias digitales útiles, funcionales y orientadas a resolver problemas reales.",
   location: "Santiago, Chile",
   email: "andrea.espinola.fuentes@gmail.com",
   linkedin: "https://linkedin.com/in/andrea-espinola",
@@ -30,7 +30,7 @@ const PROJECTS = [
     stack: ["React", "Firebase", "Tailwind", "Firestore"],
     repo: "https://github.com/AndreaEspinola-dev/spot-essence-inventario",
     demo: "https://docs.google.com/gview?url=https://raw.githubusercontent.com/AndreaEspinola-dev/spot-essence-inventario/main/App%20Spot/App%20Spot%20(1)%20(1).pdf&embedded=true",
-    cover:"/public/imagenes/Spotnegro.jpg"
+    cover:"public/imagenes/Spotnegro.jpg"
   },
     // ⭐ FitnessApp
   {
