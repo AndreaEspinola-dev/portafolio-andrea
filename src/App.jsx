@@ -1,10 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ExternalLink, Code2, User, Download, Sparkles } from "lucide-react";
-import { MoonStar } from "lucide-react";
+import { MoonStar,  } from "lucide-react";
 import "./App.css";
 import "./index.css"
 import { useSmoothScroll } from "./hooks/useSmoothScroll";
+import { useState, useEffect } from "react";
+
 
 
 
@@ -71,9 +73,74 @@ const EXPERIENCE = [
       "App web de inventario en tiempo real (fabricación, movimientos, alertas).",
       "Autenticación con roles (admin/operador) y UI responsive.",
       "Firestore para CRUD y suscripciones en vivo.",
+      "Capacitación a los trabajadores en el uso de la app, incluyendo demostraciones, acompañamiento y resolución de dudas durante la adopción de la herramienta.",
+    ],
+    tech: ["React", "Firebase", "Firestore", "TailwindCSS"],
+  },
+    {
+    role: "Desarrolladora Full stack (Colaboradora)",
+    company: "FitnessApp – Proyecto Colaborativo",
+    period: "2024",
+    bullets: [
+      "Participación en el desarrollo de una aplicación móvil enfocada en el seguimiento de entrenamientos para mujeres.",
+      "Colaboración en funcionalidades basadas en ciclos menstruales, objetivos físicos y métricas de progreso.",
+      "Implementación de pantallas, diseño de interfaz y mejora de experiencia de usuaria.",
+      "Trabajo colaborativo aplicando buenas prácticas front-end."
+    ],
+    tech: ["React Native", "Ionic", "Angular","TypeScript", "UI Design"], 
+  },
+];
+const COURSES = [
+  {
+    title: "Desarrollo de Software y Programación",
+    school: "Instituto Profesional Santo Tomás · Analista Programador",
+    period: "2023 – 2025",
+    bullets: [
+      "Fundamentos de Programación Orientada a Objetos",
+      "Estructuras de Datos y Algoritmos",
+      "Programación Web",
+      "Programación .NET",
+      "Programación Android",
+      "Patrones de Diseño y Diseño de Software",
+    ],
+  },
+  {
+    title: "Bases de Datos y Arquitectura de Sistemas",
+    school: "Instituto Profesional Santo Tomás",
+    period: "2023 – 2025",
+    bullets: [
+      "Consulta de Bases de Datos",
+      "Diseño de Bases de Datos",
+      "Sistemas Operativos Windows",
+      "Sistemas Operativos GNU/Linux",
+      "Arquitectura de Sistemas",
+    ],
+  },
+  {
+    title: "Cloud, IoT e Innovación Tecnológica",
+    school: "Instituto Profesional Santo Tomás",
+    period: "2024 – 2025",
+    bullets: [
+      "Computación en la Nube",
+      "Internet de las Cosas",
+
+    ],
+  },
+  {
+    title: "Habilidades Profesionales y Comunicación",
+    school: "Instituto Profesional Santo Tomás",
+    period: "2023 – 2024",
+    bullets: [
+      "Taller de Habilidades Comunicativas",
+      "Comunicación Profesional Efectiva",
+      "Orientación al Empleo y Emprendimiento",
+      "Iniciativa y Gestión Personal y Social",
+      "Ética Profesional",
     ],
   },
 ];
+
+
 // ============================
 
 export default function App() {
@@ -87,6 +154,7 @@ export default function App() {
         <Projects />
         <Skills />
         <Experience />
+        <Courses />
         <Contact />
         <Footer />
       </main>
@@ -94,56 +162,95 @@ export default function App() {
   );
 }
 
+const NAV_ITEMS = [
+  { id: "projects", label: "Proyectos" },
+  { id: "skills", label: "Habilidades" },
+  { id: "experience", label: "Experiencia" },
+  { id: "courses", label: "Cursos" },
+  { id: "contact", label: "Contacto" },
+];
+
 function Navbar() {
+  const [activeSection, setActiveSection] = useState("projects");
+
+  // Detectar la sección visible mientras se hace scroll
+  useEffect(() => {
+    const sections = ["projects", "skills", "experience", "courses", "contact"];
+
+    function handleScroll() {
+      const scrollY = window.scrollY + 150; // margen para detección más precisa
+
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+
+        if (scrollY >= top && scrollY < bottom) {
+          setActiveSection(id);
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const NAV_ITEMS = [
+    { id: "projects", label: "Proyectos" },
+    { id: "skills", label: "Habilidades" },
+    { id: "experience", label: "Experiencia" },
+    { id: "courses", label: "Cursos" },
+    { id: "contact", label: "Contacto" },
+  ];
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur bg-[#0b0b12]/60 border-b border-white/10">
       <div className="mx-auto max-w-6xl px-5 md:px-8 h-14 flex items-center justify-between">
+        
+        {/* Logo */}
+        <a href="#top" className="flex items-center gap-2 font-semibold tracking-wide group">
+          <MoonStar className="h-5 w-5 text-pink-400 transition-all duration-300 group-hover:rotate-12 group-hover:text-fuchsia-400 animate-pulse" />
+          <span>
+            Andrea<span className="text-pink-400">.</span>
+          </span>
+        </a>
 
-
-        {/* Marca: icono + nombre */}
-            <a href="#top" className="flex items-center gap-2 font-semibold tracking-wide group">
-              <MoonStar className="h-5 w-5 text-pink-400 transition-all duration-300 group-hover:rotate-12 group-hover:text-fuchsia-400 animate-pulse" />
-              <span>
-                Andrea<span className="text-pink-400">.</span>
-              </span>
-            </a>
-
-
-        {/* Menú con hover animado */}
+        {/* Navbar */}
         <nav className="hidden md:flex items-center gap-1 text-sm">
-          {[
-
-
-
-            
-            { href: "#projects", label: "Proyectos" },
-            { href: "#skills", label: "Habilidades" },
-            { href: "#experience", label: "Experiencia" },
-            { href: "#contact", label: "Contacto" },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="
-                relative inline-block px-3 py-1
-                text-white/80 transition-colors
-                hover:text-pink-300 focus-visible:outline-none
-                focus-visible:ring-2 focus-visible:ring-pink-500/40 rounded-md
-                after:absolute after:left-3 after:right-3 after:-bottom-0.5
-                after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-pink-400 after:to-fuchsia-500
-                after:transition-all after:duration-300 hover:after:w-[calc(100%-1.5rem)]
-              "
-              
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() =>
+                document.getElementById(item.id)?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                })
+              }
+              className={`
+                relative inline-block px-3 py-1 rounded-md transition-all
+                ${activeSection === item.id ? "text-pink-300" : "text-white/80 hover:text-pink-300"}
+              `}
             >
               {item.label}
-            </a>
+
+              {/* Línea inferior animada */}
+              <span
+                className={`
+                  absolute left-3 right-3 bottom-0 h-[2px] rounded-full bg-gradient-to-r 
+                  from-pink-400 to-fuchsia-500 transition-all duration-300
+                  ${activeSection === item.id ? "w-[calc(100%-1.5rem)] opacity-100" : "w-0 opacity-0"}
+                `}
+              />
+            </button>
           ))}
         </nav>
-        
 
         {/* Botón CV */}
         <a
-         href="./CVAndreaEspinola.pdf"
+          href="./CVAndreaEspinola.pdf"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 text-pink-300 border border-pink-500/40 bg-pink-500/10 hover:bg-pink-500/20 rounded-lg px-3 py-1.5"
@@ -155,6 +262,8 @@ function Navbar() {
     </header>
   );
 }
+
+
 
 
 function Hero() {
@@ -377,30 +486,32 @@ function Experience() {
             key={e.company}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
             className="experience-card"
           >
-            {/* Etiqueta arriba */}
             <div className="flex items-center justify-between mb-2">
-              <span className="experience-badge">
-                {e.company}
-              </span>
-              <span className="experience-period">
-                {e.period}
-              </span>
+              <span className="experience-badge">{e.company}</span>
+              <span className="experience-period">{e.period}</span>
             </div>
 
-            <h3 className="experience-role">
-              {e.role}
-            </h3>
+            <h3 className="experience-role">{e.role}</h3>
 
-            <ul className="experience-list">
+            <ul className="list-disc pl-5 space-y-2 text-white/80 mt-3 text-left">
+
               {e.bullets.map((b) => (
                 <li key={b}>{b}</li>
               ))}
             </ul>
+
+            {/* NUEVO: Badge de Tecnologías */}
+            <div className="experience-tech-group mt-4">
+              {e.tech?.map((t) => (
+                <span key={t} className="experience-tech-pill">{t}</span>
+              ))}
+            </div>
           </motion.div>
+
         ))}
       </div>
     </section>
@@ -427,6 +538,47 @@ function Skills() {
     </section>
   );
 }
+
+
+function Courses() {
+  return (
+    <section id="courses" className="py-8 sm:py-12">
+      <SectionTitle
+        title="Cursos y Formación"
+        subtitle="Estudios complementarios y aprendizajes formales"
+      />
+
+      {/* 👉 GRID de tarjetas */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-8 place-items-stretch">
+
+        {COURSES.map((c, i) => (
+          <motion.div
+            key={c.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: i * 0.07 }}
+            className="course-card h-full"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="course-title text-center leading-tight">{c.title}</h3>
+              <span className="course-period">{c.period}</span>
+            </div>
+
+
+            <ul className="course-list mt-3 space-y-1.5 text-left">
+              {c.bullets.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 
 
 function Contact() {
