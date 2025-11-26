@@ -1,0 +1,57 @@
+/* src/App.css */
+@reference "./index.css";
+
+@layer components {
+  /* ===== NAVBAR ===== */
+  .navbar { @apply sticky top-0 z-40 backdrop-blur bg-[#0b0b12]/60 border-b border-white/10; }
+  .navbar-container { @apply mx-auto max-w-6xl px-5 md:px-8 h-14 flex items-center justify-between; }
+
+  /* NO uses @apply group aquí */
+  .navbar-brand { @apply flex items-center gap-2 font-semibold tracking-wide; }
+
+  /* Icono de la marca: base + efecto con .group en el JSX */
+  .brand-icon { @apply h-5 w-5 text-pink-400 transition-transform; }
+  .group:hover .brand-icon { @apply rotate-12; }
+
+  .navbar-menu { @apply hidden md:flex items-center gap-1 text-sm; }
+  .navbar-link { @apply relative inline-block px-3 py-1 text-white/80 transition-colors hover:text-pink-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500/40 rounded-md; }
+  .navbar-link::after { content:""; @apply absolute left-3 right-3 -bottom-0.5 h-[2px] w-0 bg-gradient-to-r from-pink-400 to-fuchsia-500 transition-all duration-300; }
+  .navbar-link:hover::after { @apply w-[calc(100%-1.5rem)]; }
+  .navbar-cv { @apply inline-flex items-center gap-2 text-pink-300 border border-pink-500/40 bg-pink-500/10 hover:bg-pink-500/20 rounded-lg px-3 py-1.5; }
+
+  /* ===== SECCIONES ===== */
+  .section { @apply py-8 sm:py-12; }
+  .section-title { @apply text-2xl sm:text-3xl font-semibold tracking-tight mb-6 sm:mb-8; }
+  .section-subtitle { @apply text-white/60; }
+
+  /* ===== CARD PROYECTO ===== */
+  .card-fx { @apply relative rounded-2xl bg-white/5 border border-white/10 overflow-hidden transition-all duration-300; }
+  .card-fx::before {
+    content: "";
+    @apply absolute inset-0 -z-10 opacity-0 blur-2xl transition-opacity duration-300;
+    background: radial-gradient(600px 200px at 0% 0%, rgba(236,72,153,.25), transparent 60%),
+                radial-gradient(600px 200px at 100% 100%, rgba(99,102,241,.20), transparent 60%);
+  }
+  .card-fx:hover::before { @apply opacity-100; }
+  .card-fx:hover { @apply border-pink-500/30 shadow-xl shadow-pink-500/10; }
+
+  .card-img { @apply h-44 overflow-hidden; }
+  .card-img img { @apply h-full w-full object-cover scale-100 transition-transform duration-500; }
+  .group:hover .card-img img { @apply scale-105; }
+
+  .card-title { @apply text-lg font-semibold leading-snug transition-colors; }
+  .group:hover .card-title { @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-fuchsia-400; }
+
+  .card-title-line { @apply relative inline-block; }
+  .card-title-line::after { content:""; @apply absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-pink-400 to-fuchsia-500 transition-all duration-300; }
+  .group:hover .card-title-line::after { @apply w-full; }
+
+  .card-desc { @apply text-white/70 transition-colors; }
+  .group:hover .card-desc { @apply text-white/80; }
+
+  .pill { @apply text-xs rounded-full border border-white/15 bg-white/10 px-2.5 py-1 shadow-[0_0_0_0_rgba(236,72,153,0)] transition-[box-shadow,transform] duration-300; }
+  .group:hover .pill { box-shadow: 0 0 20px rgba(236,72,153,.15); }
+
+  .btn-ghost { @apply inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-1.5 hover:bg-white/5 transition-colors; }
+  .btn-primary { @apply inline-flex items-center gap-2 rounded-lg bg-pink-500 hover:bg-pink-600 px-3 py-1.5 text-white; }
+}
