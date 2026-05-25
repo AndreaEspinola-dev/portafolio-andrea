@@ -35,19 +35,37 @@
   .card-fx:hover::before { @apply opacity-100; }
   .card-fx:hover { @apply border-pink-500/30 shadow-xl shadow-pink-500/10; }
 
-  .card-img { @apply h-44 overflow-hidden; }
-  .card-img img { @apply h-full w-full object-cover scale-100 transition-transform duration-500; }
-  .group:hover .card-img img { @apply scale-105; }
+  /* Imagen con efectos */
+  .card-img-wrapper { @apply relative overflow-hidden; height: 210px; }
+  .card-img-photo { @apply w-full h-full object-cover transition-transform duration-500 ease-out; }
+  .group:hover .card-img-photo { @apply scale-105; }
+
+  /* Degradado inferior que fusiona imagen con la card */
+  .card-img-gradient {
+    @apply absolute inset-x-0 bottom-0 pointer-events-none;
+    height: 60%;
+    background: linear-gradient(to top, rgba(15,15,24,0.95) 0%, transparent 100%);
+  }
+
+  /* Overlay oscuro al hacer hover */
+  .card-img-overlay {
+    @apply absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 pointer-events-none;
+    background: rgba(10, 10, 18, 0.45);
+  }
+  .group:hover .card-img-overlay { @apply opacity-100; }
+
+  /* Badge de categoría sobre la imagen */
+  .card-category-badge {
+    @apply absolute top-3 left-3 text-xs font-medium px-2.5 py-1 rounded-full;
+    background: rgba(10, 10, 18, 0.75);
+    border: 1px solid rgba(236,72,153,0.45);
+    color: #f9a8d4;
+    backdrop-filter: blur(6px);
+  }
 
   .card-title { @apply text-lg font-semibold leading-snug transition-colors; }
-  .group:hover .card-title { @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-fuchsia-400; }
-
-  .card-title-line { @apply relative inline-block; }
-  .card-title-line::after { content:""; @apply absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-pink-400 to-fuchsia-500 transition-all duration-300; }
-  .group:hover .card-title-line::after { @apply w-full; }
-
-  .card-desc { @apply text-white/70 transition-colors; }
-  .group:hover .card-desc { @apply text-white/80; }
+  .card-desc { @apply text-white/70 text-sm transition-colors; }
+  .group:hover .card-desc { @apply text-white/85; }
 
   .pill { @apply text-xs rounded-full border border-white/15 bg-white/10 px-2.5 py-1 shadow-[0_0_0_0_rgba(236,72,153,0)] transition-[box-shadow,transform] duration-300; }
   .group:hover .pill { box-shadow: 0 0 20px rgba(236,72,153,.15); }
